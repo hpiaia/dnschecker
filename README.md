@@ -11,7 +11,8 @@ Check the propagation of a DNS around the world.
 * [Usage](#usage)
 
 # Usage
-```sh-session
+
+```
 check the propagation of a dns around the world
 
 USAGE
