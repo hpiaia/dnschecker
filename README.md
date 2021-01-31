@@ -1,18 +1,16 @@
-dnschecker
+DNS Checker CLI
 ==========
 
-Check the propagation of a DNS around the world.
+CLI tool to check the propagation of a DNS around the world using [DNS Checker](https://dnschecker.org/) service.
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/dnschecker.svg)](https://npmjs.org/package/dnschecker)
 [![Downloads/week](https://img.shields.io/npm/dw/dnschecker.svg)](https://npmjs.org/package/dnschecker)
 [![License](https://img.shields.io/npm/l/dnschecker.svg)](https://github.com/hpiaia/dnschecker/blob/master/package.json)
 
-* [Usage](#usage)
-
 # Usage
 
-```
+```shell
 check the propagation of a dns around the world
 
 USAGE
