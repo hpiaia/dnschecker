@@ -1,8 +1,21 @@
-import fetch from 'node-fetch'
-import {BASE_URL} from './settings'
-import cli from 'cli-ux'
+import cli from 'cli-ux';
+import fetch from 'node-fetch';
 
-type DnsType = 'A' | 'AAAA' | 'CNAME' | 'MX' | 'NS' | 'PTR' | 'SRV' | 'SOA' | 'TXT' | 'CAA' | 'DS' | 'DNSKEY'
+import { BASE_URL } from './settings';
+
+type DnsType =
+  | 'A'
+  | 'AAAA'
+  | 'CNAME'
+  | 'MX'
+  | 'NS'
+  | 'PTR'
+  | 'SRV'
+  | 'SOA'
+  | 'TXT'
+  | 'CAA'
+  | 'DS'
+  | 'DNSKEY';
 
 interface CheckServerRequest {
   serverId: number;
@@ -12,47 +25,50 @@ interface CheckServerRequest {
 }
 
 const generateCsrf = async () => {
-  const {csrf} = await fetch(`${BASE_URL}/ajax_files/gen_csrf.php`, {
+  const { csrf } = await fetch(`${BASE_URL}/ajax_files/gen_csrf.php`, {
     headers: {
       referer: BASE_URL,
     },
-  }).then<{csrf: string}>(res => res.json())
+  }).then<{ csrf: string }>((res) => res.json());
 
-  return csrf
-}
+  return csrf;
+};
 
 const checkServer = async (request: CheckServerRequest) => {
-  const {serverId, dnsType, csrftoken, uri} = request
+  const { serverId, dnsType, csrftoken, uri } = request;
 
-  const data = await fetch(`${BASE_URL}/ajax_files/api/${serverId}/${dnsType}/${uri}`, {
-    headers: {
-      referer: BASE_URL,
-      csrftoken,
-    },
-  }).then(res => res.json())
+  const data = await fetch(
+    `${BASE_URL}/ajax_files/api/${serverId}/${dnsType}/${uri}`,
+    {
+      headers: {
+        referer: BASE_URL,
+        csrftoken,
+      },
+    }
+  ).then((res) => res.json());
 
-  return data
-}
+  return data;
+};
 
 export const check = async (uri: string, dnsType: DnsType) => {
-  cli.action.start('generating csrf token')
+  cli.action.start('generating csrf token');
 
-  const csrftoken = await generateCsrf()
+  const csrftoken = await generateCsrf();
 
-  cli.action.stop()
+  cli.action.stop();
 
-  cli.action.start('fetching dns for server 0')
+  cli.action.start('fetching dns for server 0');
 
   const res = await checkServer({
     serverId: 0,
     dnsType,
     csrftoken,
     uri,
-  })
+  });
 
-  cli.action.stop()
+  cli.action.stop();
 
-  cli.log(res)
+  cli.log(res);
 
-  return {}
-}
+  return {};
+};

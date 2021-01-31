@@ -1,12 +1,13 @@
-import {Command, flags} from '@oclif/command'
-import {check} from './checker'
+import { Command, flags } from '@oclif/command';
+
+import { check } from './checker';
 
 class Dnschecker extends Command {
   static description = 'check the propagation of a dns around the world';
 
   static flags = {
-    version: flags.version({char: 'v'}),
-    help: flags.help({char: 'h'}),
+    version: flags.version({ char: 'v' }),
+    help: flags.help({ char: 'h' }),
   };
 
   static args = [
@@ -38,9 +39,9 @@ class Dnschecker extends Command {
   ];
 
   async run() {
-    const {args} = this.parse(Dnschecker)
+    const { args } = this.parse(Dnschecker);
 
-    await check(args.uri, args.dnsType)
+    await check(args.uri, args.dnsType);
   }
 }
 
