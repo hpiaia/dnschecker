@@ -12,13 +12,16 @@ Check the propagation of a DNS around the world.
 
 # Usage
 ```sh-session
-$ npm install -g dnschecker
-$ dnschecker COMMAND
-running command...
-$ dnschecker (-v|--version|version)
-dnschecker/0.0.1 darwin-x64 node-v15.6.0
-$ dnschecker --help [COMMAND]
+check the propagation of a dns around the world
+
 USAGE
-  $ dnschecker COMMAND
-...
+  $ dnschecker URI [DNSTYPE]
+
+ARGUMENTS
+  URI      the uri you want to check the dns
+  DNSTYPE  (A|AAAA|CNAME|MX|NS|PTR|SRV|SOA|TXT|CAA|DS|DNSKEY) [default: A] the type of the dns you want to check
+
+OPTIONS
+  -h, --help     show CLI help
+  -v, --version  show CLI version
 ```

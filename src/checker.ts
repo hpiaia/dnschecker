@@ -2,9 +2,11 @@ import fetch from 'node-fetch'
 import {BASE_URL} from './settings'
 import cli from 'cli-ux'
 
+type DnsType = 'A' | 'AAAA' | 'CNAME' | 'MX' | 'NS' | 'PTR' | 'SRV' | 'SOA' | 'TXT' | 'CAA' | 'DS' | 'DNSKEY'
+
 interface CheckServerRequest {
   serverId: number;
-  dnsType: string;
+  dnsType: DnsType;
   uri: string;
   csrftoken: string;
 }
@@ -32,7 +34,7 @@ const checkServer = async (request: CheckServerRequest) => {
   return data
 }
 
-export const check = async (uri: string) => {
+export const check = async (uri: string, dnsType: DnsType) => {
   cli.action.start('generating csrf token')
 
   const csrftoken = await generateCsrf()
@@ -43,7 +45,7 @@ export const check = async (uri: string) => {
 
   const res = await checkServer({
     serverId: 0,
-    dnsType: 'A',
+    dnsType,
     csrftoken,
     uri,
   })
